@@ -1,8 +1,10 @@
-﻿using System;
+﻿
+using System;
 
 
 
-namespace kolko_i_krzyzyk
+
+namespace kolko_i_krzyzyk_ob
 {
     enum TypGracza
     {
@@ -11,16 +13,18 @@ namespace kolko_i_krzyzyk
         puste
     }
 
-    public static class Zmienne
+    public class Zmienne
     {
         public static int runda = 0;
         public static string figura;
+
     }
     class Program
     {
 
         public static void Main(string[] args)
         {
+
 
             int i = 1;
             do
@@ -29,8 +33,11 @@ namespace kolko_i_krzyzyk
 
                 Zmienne.figura = "O";
 
-                string[,] plansza = new string[3, 3];
-                Reset(plansza);
+                // string[,] plansza = new string[3, 3];
+
+                Plansza plansza = new Plansza();
+                
+                Console.Clear();
 
                 do
                 {
@@ -69,10 +76,10 @@ namespace kolko_i_krzyzyk
                     break;
                 }
             } while (i == 1);
-
+            
 
         }
-
+    /*
         public static string[,] PoleGry(string[,] plansza)
         {
 
@@ -83,19 +90,19 @@ namespace kolko_i_krzyzyk
 
         }
 
+        */
 
 
 
 
 
-
-        public static void Reset(string[,] plansza)
+        public static void Reset(Plansza plansza)
         {
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    plansza[i, j] = " ";
+                   
 
                 }
             }
@@ -103,7 +110,7 @@ namespace kolko_i_krzyzyk
             Console.Clear();
 
         }
-        public static bool CzyGraczWygrał(string[,] plansza, TypGracza Gracz)
+        public static bool CzyGraczWygrał(Plansza plansza, TypGracza Gracz)
         {
             Wynik WynikX = new Wynik(0);
             Wynik WynikO = new Wynik(0);
@@ -126,7 +133,7 @@ namespace kolko_i_krzyzyk
             ZmienFigure();
             return false;
         }
-        public static bool CzyZestawNaPlanszy(int indexZestawu, string[,] plansza)
+        public static bool CzyZestawNaPlanszy(int indexZestawu, Plansza plansza)
         {
             int[,] zestawWygrywajacy = new int[24, 2]
             {
@@ -171,7 +178,7 @@ namespace kolko_i_krzyzyk
             {
                 int x = zestawWygrywajacy[indexZestawu + pozycja, 0];
                 int y = zestawWygrywajacy[indexZestawu + pozycja, 1];
-                if (plansza[x, y] == Zmienne.figura)
+                if (plansza.getPlansza(x,y) == Zmienne.figura)
                 {
                     ileZgodnych++;
                     if (ileZgodnych == 3)
@@ -201,13 +208,13 @@ namespace kolko_i_krzyzyk
                 return "X";
             }
         }
-        public static void WykonajRuch(string[,] plansza, TypGracza Gracz)
+        public static void WykonajRuch(Plansza plansza, TypGracza Gracz)
         {
             bool valid = true;
             do
             {
                 Console.WriteLine("Gdzie chcesz się ruszyć? \n\n Wpisz help jeśli potrzebujesz pomocy\n\n");
-                PoleGry(plansza);
+                plansza.wypiszPlansze();
                 string ruch = Console.ReadLine();
 
 
@@ -221,10 +228,10 @@ namespace kolko_i_krzyzyk
                         switch (ruch1)
                         {
                             case 1:
-                                if (plansza[2, 0] == " ")
+                                if (plansza.getPlansza(2, 0) == " ")
                                 {
-                                    plansza[2, 0] = Zmienne.figura;
-                                    PoleGry(plansza);
+                                    plansza.setPlansza(2,0);
+                                    plansza.wypiszPlansze();
                                     CzyGraczWygrał(plansza, Gracz);
                                     break;
                                 }
@@ -239,10 +246,10 @@ namespace kolko_i_krzyzyk
                                 }
 
                             case 2:
-                                if (plansza[2, 1] == " ")
+                                if (plansza.getPlansza(2, 1) == " ")
                                 {
-                                    plansza[2, 1] = Zmienne.figura;
-                                    PoleGry(plansza);
+                                    plansza.setPlansza(2, 1);
+                                    plansza.wypiszPlansze();
                                     CzyGraczWygrał(plansza, Gracz);
                                     break;
                                 }
@@ -257,10 +264,10 @@ namespace kolko_i_krzyzyk
                                 }
 
                             case 3:
-                                if (plansza[2, 2] == " ")
+                                if (plansza.getPlansza(2, 2) == " ")
                                 {
-                                    plansza[2, 2] = Zmienne.figura;
-                                    PoleGry(plansza);
+                                    plansza.setPlansza(2, 2);
+                                    plansza.wypiszPlansze();
                                     CzyGraczWygrał(plansza, Gracz);
                                     break;
                                 }
@@ -275,10 +282,10 @@ namespace kolko_i_krzyzyk
                                 }
 
                             case 4:
-                                if (plansza[1, 0] == " ")
+                                if (plansza.getPlansza(1, 0) == " ")
                                 {
-                                    plansza[1, 0] = Zmienne.figura;
-                                    PoleGry(plansza);
+                                    plansza.setPlansza(1, 0);
+                                    plansza.wypiszPlansze();
                                     CzyGraczWygrał(plansza, Gracz);
                                     break;
                                 }
@@ -293,10 +300,10 @@ namespace kolko_i_krzyzyk
                                 }
 
                             case 5:
-                                if (plansza[1, 1] == " ")
+                                if (plansza.getPlansza(1, 1) == " ")
                                 {
-                                    plansza[1, 1] = Zmienne.figura;
-                                    PoleGry(plansza);
+                                    plansza.setPlansza(1, 1);
+                                    plansza.wypiszPlansze();
                                     CzyGraczWygrał(plansza, Gracz);
                                     break;
                                 }
@@ -311,10 +318,10 @@ namespace kolko_i_krzyzyk
                                 }
 
                             case 6:
-                                if (plansza[1, 2] == " ")
+                                if (plansza.getPlansza(1, 2) == " ")
                                 {
-                                    plansza[1, 2] = Zmienne.figura;
-                                    PoleGry(plansza);
+                                    plansza.setPlansza(1, 2);
+                                    plansza.wypiszPlansze();
                                     CzyGraczWygrał(plansza, Gracz);
                                     break;
                                 }
@@ -329,10 +336,10 @@ namespace kolko_i_krzyzyk
                                 }
 
                             case 7:
-                                if (plansza[0, 0] == " ")
+                                if (plansza.getPlansza(0, 0) == " ")
                                 {
-                                    plansza[0, 0] = Zmienne.figura;
-                                    PoleGry(plansza);
+                                    plansza.setPlansza(0, 0);
+                                    plansza.wypiszPlansze();
                                     CzyGraczWygrał(plansza, Gracz);
                                     break;
                                 }
@@ -347,10 +354,10 @@ namespace kolko_i_krzyzyk
                                 }
 
                             case 8:
-                                if (plansza[0, 1] == " ")
+                                if (plansza.getPlansza(0, 1) == " ")
                                 {
-                                    plansza[0, 1] = Zmienne.figura;
-                                    PoleGry(plansza);
+                                    plansza.setPlansza(0, 1);
+                                    plansza.wypiszPlansze();
                                     CzyGraczWygrał(plansza, Gracz);
                                     break;
                                 }
@@ -365,10 +372,10 @@ namespace kolko_i_krzyzyk
                                 }
 
                             case 9:
-                                if (plansza[0, 2] == " ")
+                                if (plansza.getPlansza(0, 2) == " ")
                                 {
-                                    plansza[0, 2] = Zmienne.figura;
-                                    PoleGry(plansza);
+                                    plansza.setPlansza(0, 2);
+                                    plansza.wypiszPlansze();
                                     CzyGraczWygrał(plansza, Gracz);
                                     break;
                                 }
@@ -410,7 +417,7 @@ namespace kolko_i_krzyzyk
                             break;
 
                         case "reset":
-                            Reset(plansza);
+                            plansza.resetPlansza();
                             valid = false;
                             Zmienne.figura = "X";
                             Console.WriteLine("Ruch gracza: " + Zmienne.figura);

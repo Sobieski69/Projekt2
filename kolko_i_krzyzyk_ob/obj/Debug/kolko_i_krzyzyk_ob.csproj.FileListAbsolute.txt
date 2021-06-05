@@ -1,0 +1,7 @@
+C:\Users\kubus\Desktop\szkola\pp\Projekt 2\kolko_i_krzyzyk_ob\kolko_i_krzyzyk_ob\bin\Debug\kolko_i_krzyzyk_ob.exe.config
+C:\Users\kubus\Desktop\szkola\pp\Projekt 2\kolko_i_krzyzyk_ob\kolko_i_krzyzyk_ob\bin\Debug\kolko_i_krzyzyk_ob.exe
+C:\Users\kubus\Desktop\szkola\pp\Projekt 2\kolko_i_krzyzyk_ob\kolko_i_krzyzyk_ob\bin\Debug\kolko_i_krzyzyk_ob.pdb
+C:\Users\kubus\Desktop\szkola\pp\Projekt 2\kolko_i_krzyzyk_ob\kolko_i_krzyzyk_ob\obj\Debug\kolko_i_krzyzyk_ob.csprojAssemblyReference.cache
+C:\Users\kubus\Desktop\szkola\pp\Projekt 2\kolko_i_krzyzyk_ob\kolko_i_krzyzyk_ob\obj\Debug\kolko_i_krzyzyk_ob.csproj.CoreCompileInputs.cache
+C:\Users\kubus\Desktop\szkola\pp\Projekt 2\kolko_i_krzyzyk_ob\kolko_i_krzyzyk_ob\obj\Debug\kolko_i_krzyzyk_ob.exe
+C:\Users\kubus\Desktop\szkola\pp\Projekt 2\kolko_i_krzyzyk_ob\kolko_i_krzyzyk_ob\obj\Debug\kolko_i_krzyzyk_ob.pdb
