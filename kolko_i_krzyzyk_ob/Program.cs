@@ -24,73 +24,77 @@ namespace kolko_i_krzyzyk_ob
 
         public static void Main(string[] args)
         {
-
-
-            int i = 1;
-            do
-            {
-                TypGracza Gracz;
-
-                Zmienne.figura = "O";
-
-                // string[,] plansza = new string[3, 3];
-
-                Plansza plansza = new Plansza();
-                
-                Console.Clear();
-
-                do
-                {
-                    Zmienne.figura = ZmienFigure();
-                    if (Zmienne.figura == "O")
-                    {
-                        Gracz = TypGracza.O;
-                    }
-                    else
-                    {
-                        Gracz = TypGracza.X;
-                    }
-                    Console.WriteLine("Ruch gracza: " + Gracz);
-                    WykonajRuch(plansza, Gracz);
-
-                    Console.Clear();
-                    Zmienne.runda++;
-                    if (Zmienne.runda == 9 && CzyGraczWygrał(plansza, Gracz) == false)
-                    {
-                        Console.WriteLine("Mecz nierozstrzygnięty");
-                        break;
-                    }
-                    Console.WriteLine("runda: " + Zmienne.runda);
-
-
-                } while (!CzyGraczWygrał(plansza, Gracz));
-                Console.WriteLine("chesz zagrac jeszcze raz? (ENTER) / Zakończ program(ESC)");
-
-                if (Console.ReadKey().Key == ConsoleKey.Enter)
-                {
-                    Console.Clear();
-                    continue;
-                }
-                else
-                {
-                    break;
-                }
-            } while (i == 1);
+            Gra gra = new Gra();
+            gra.Graj();
+            Console.ReadLine();
             
 
+            /*
+                        int i = 1;
+                        do
+                        {
+                            TypGracza Gracz;
+
+                            Zmienne.figura = "O";
+
+                            // string[,] plansza = new string[3, 3];
+
+                            Plansza plansza = new Plansza();
+
+                            Console.Clear();
+
+                            do
+                            {
+                                Zmienne.figura = ZmienFigure();
+                                if (Zmienne.figura == "O")
+                                {
+                                    Gracz = TypGracza.O;
+                                }
+                                else
+                                {
+                                    Gracz = TypGracza.X;
+                                }
+                                Console.WriteLine("Ruch gracza: " + Gracz);
+                                WykonajRuch(plansza, Gracz);
+
+                                Console.Clear();
+                                Zmienne.runda++;
+                                if (Zmienne.runda == 9 && CzyGraczWygrał(plansza, Gracz) == false)
+                                {
+                                    Console.WriteLine("Mecz nierozstrzygnięty");
+                                    break;
+                                }
+                                Console.WriteLine("runda: " + Zmienne.runda);
+
+
+                            } while (!CzyGraczWygrał(plansza, Gracz));
+                            Console.WriteLine("chesz zagrac jeszcze raz? (ENTER) / Zakończ program(ESC)");
+
+                            if (Console.ReadKey().Key == ConsoleKey.Enter)
+                            {
+                                Console.Clear();
+                                continue;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        } while (i == 1);
+                        */
+
         }
-    /*
-        public static string[,] PoleGry(string[,] plansza)
-        {
+        /*
+            public static string[,] PoleGry(string[,] plansza)
+            {
 
 
 
-            Console.Write(plansza[0, 0] + " | " + plansza[0, 1] + " | " + plansza[0, 2] + "\n" + "--+---+--" + "\n" + plansza[1, 0] + " | " + plansza[1, 1] + " | " + plansza[1, 2] + "\n" + "--+---+--" + "\n" + plansza[2, 0] + " | " + plansza[2, 1] + " | " + plansza[2, 2] + "\n");
-            return plansza;
+                Console.Write(plansza[0, 0] + " | " + plansza[0, 1] + " | " + plansza[0, 2] + "\n" + "--+---+--" + "\n" + plansza[1, 0] + " | " + plansza[1, 1] + " | " + plansza[1, 2] + "\n" + "--+---+--" + "\n" + plansza[2, 0] + " | " + plansza[2, 1] + " | " + plansza[2, 2] + "\n");
+                return plansza;
 
-        }
+            }
 
-        */
+            */
 
 
 
@@ -102,7 +106,7 @@ namespace kolko_i_krzyzyk_ob
             {
                 for (int j = 0; j < 3; j++)
                 {
-                   
+
 
                 }
             }
@@ -178,7 +182,7 @@ namespace kolko_i_krzyzyk_ob
             {
                 int x = zestawWygrywajacy[indexZestawu + pozycja, 0];
                 int y = zestawWygrywajacy[indexZestawu + pozycja, 1];
-                if (plansza.getPlansza(x,y) == Zmienne.figura)
+                if (plansza.getPlansza(x, y) == Zmienne.figura)
                 {
                     ileZgodnych++;
                     if (ileZgodnych == 3)
@@ -208,7 +212,7 @@ namespace kolko_i_krzyzyk_ob
                 return "X";
             }
         }
-        public static void WykonajRuch(Plansza plansza, TypGracza Gracz)
+        /*public static void WykonajRuch(Plansza plansza, TypGracza Gracz)
         {
             bool valid = true;
             do
@@ -448,22 +452,23 @@ namespace kolko_i_krzyzyk_ob
             } while (!valid);
 
         }
-    }
-    public class Wynik
-    {
-        int iloscPunktow = 0;
-
-        public Wynik(int iloscPunktow)
+    }*/
+        public class Wynik
         {
-            this.iloscPunktow = iloscPunktow;
+            int iloscPunktow = 0;
+
+            public Wynik(int iloscPunktow)
+            {
+                this.iloscPunktow = iloscPunktow;
+            }
+
+            public void setWynik()
+            {
+                iloscPunktow++;
+            }
+
         }
 
-        public void setWynik()
-        {
-            iloscPunktow++;
-        }
-
     }
-
 }
 

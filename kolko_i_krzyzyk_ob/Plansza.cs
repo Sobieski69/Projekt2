@@ -6,35 +6,43 @@ using System.Threading.Tasks;
 
 namespace kolko_i_krzyzyk_ob
 {
-    class Plansza : Zmienne
+    public class Plansza 
     {
-        public string[,] plansza = new string[3, 3];
-        
+
+        //Plansza[,] plansza = new Plansza[3, 3];
+        string[,] plansza1 = new string[3, 3]
+        {
+            {"X","X","X"},
+            {"X","X","X"},
+            {"X","X","X"}
+        };
+
         public Plansza()
             {
-               for (int i =0; i < 3; i++)
-               {
-                    for (int j = 0; j < 3; j++)
-                    {
-                    plansza[i, j] = " ";
-                    }
-               }
-            Zmienne.runda = 0;
+
+            
+            
             }
 
-        public string getPlansza(int x, int y)
+        public string getPole(int x, int y)
         {
-            return plansza[x, y];
+            plansza1[0, 0] = "X";
+            return plansza1[x, y];
         }
-        public void setPlansza(int x, int y)
+        public string[,] getPlansza()
         {
-            this.plansza[x, y] = Zmienne.figura;
+            return plansza1;
+        }
+        public void setPlansza(int x, int y, string figura)
+        {
+            
+            plansza1[x, y] = figura;
         }
 
         public string[,] wypiszPlansze()
         {
-            Console.Write(this.plansza[0, 0] + " | " + this.plansza[0, 1] + " | " + this.plansza[0, 2] + "\n" + "--+---+--" + "\n" + this.plansza[1, 0] + " | " + this.plansza[1, 1] + " | " + this.plansza[1, 2] + "\n" + "--+---+--" + "\n" + this.plansza[2, 0] + " | " + this.plansza[2, 1] + " | " + this.plansza[2, 2] + "\n");
-            return this.plansza;
+            Console.Write(plansza1[2, 0] + " | " + plansza1[2, 1] + " | " + plansza1[2, 2] + "\n" + "--+---+--" + "\n" + plansza1[1, 0] + " | " + plansza1[1, 1] + " | " + plansza1[1, 2] + "\n" + "--+---+--" + "\n" + plansza1[0, 0] + " | " + plansza1[0, 1] + " | " + plansza1[0, 2] + "\n");
+            return plansza1;
         }
 
         public void resetPlansza()
@@ -44,10 +52,10 @@ namespace kolko_i_krzyzyk_ob
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    plansza[i, j] = " ";
+                    plansza1[i, j] = " ";
                 }
             }
-            Zmienne.runda = 0;
+            
         }
     }
 }
