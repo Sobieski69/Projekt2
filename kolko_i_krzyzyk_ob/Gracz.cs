@@ -6,26 +6,37 @@ using System.Threading.Tasks;
 
 namespace kolko_i_krzyzyk_ob
 {
-    public class Gracz
+    public class Player
     {
-        string figura;
 
-        public Gracz(string figura) 
+        String name;
+        String figure;
+        int numberOfWins = 0;
+
+        public Player(String name, String figure)
         {
-            this.figura =  figura;
+            this.figure = figure;
+            this.name = name;
         }
 
-        public string GetFigura()
+        public void increaseWinningScore()
         {
-            return figura;
-        }
-        
-        public void SetFigura()
-        {
-            if (figura == "X") figura = "O";
-            else figura = "X";
+            numberOfWins++;
         }
 
-        
+        public int getNumberOfWins()
+        {
+            return numberOfWins;
+        }
+
+        public string GetFigure()
+        {
+            return figure;
+        }
+
+        public string GetName()
+        {
+            return name;
+        }
     }
 }

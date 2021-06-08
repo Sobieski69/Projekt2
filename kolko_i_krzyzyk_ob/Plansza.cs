@@ -6,56 +6,76 @@ using System.Threading.Tasks;
 
 namespace kolko_i_krzyzyk_ob
 {
-    public class Plansza 
+    public class Board
     {
 
-        //Plansza[,] plansza = new Plansza[3, 3];
-        string[,] plansza1 = new string[3, 3]
-        {
-            {"X","X","X"},
-            {"X","X","X"},
-            {"X","X","X"}
+        private string[,] board = new string[3, 3]{
+            {" "," "," "},
+            {" "," "," "},
+            {" "," "," "}
         };
 
-        public Plansza()
+private string buildRow(string position1, string position2, string position3)
+        {
+            return position1 + " | " + position2 + " | " + position3;
+        }
+
+        private String buildSeparator()
+        {
+            return "-------";
+        }
+
+        public String buildBoardToPrint()
+        {
+            string boardTxt =
+             buildRow(board[0, 0], board[0, 1], board[0, 2])
+            + "\n"
+            + buildSeparator()
+            + "\n"
+            +  buildRow(board[1, 0], board[1, 1], board[1, 2])
+            + "\n"
+            + buildSeparator()
+            + buildRow(board[2, 0], board[2, 1], board[2, 2]);
+
+
+            return boardTxt;
+        }
+
+        
+
+
+        private int calculateRowIndex(int position)
+        {
+            int index;
+            if(position%2 == 0)
             {
-
-            
-            
+                index = (101 % (position + 1) - 1);
             }
-
-        public string getPole(int x, int y)
-        {
-            plansza1[0, 0] = "X";
-            return plansza1[x, y];
-        }
-        public string[,] getPlansza()
-        {
-            return plansza1;
-        }
-        public void setPlansza(int x, int y, string figura)
-        {
-            
-            plansza1[x, y] = figura;
-        }
-
-        public string[,] wypiszPlansze()
-        {
-            Console.Write(plansza1[2, 0] + " | " + plansza1[2, 1] + " | " + plansza1[2, 2] + "\n" + "--+---+--" + "\n" + plansza1[1, 0] + " | " + plansza1[1, 1] + " | " + plansza1[1, 2] + "\n" + "--+---+--" + "\n" + plansza1[0, 0] + " | " + plansza1[0, 1] + " | " + plansza1[0, 2] + "\n");
-            return plansza1;
-        }
-
-        public void resetPlansza()
-        {
-            Console.Clear();
-            for (int i = 0; i < 3; i++)
+            else
             {
-                for (int j = 0; j < 3; j++)
-                {
-                    plansza1[i, j] = " ";
-                }
+                index = 56 % position;
             }
-            
+            return index;
         }
+
+        private int calculateColumnIndex(int position)
+        {
+            return (position + 2) % 3;
+        }
+
+        public void updateBoard(int position, Player player)
+        {
+            board[calculateRowIndex(position), calculateColumnIndex(position)] = player.GetFigure();
+        }
+
+        public bool isAllowed(int position)
+        {
+            return board[calculateRowIndex(position), calculateColumnIndex(position)]== " ";
+        }
+        public string GetIndexValue(int x, int y)
+        {
+            return board[x, y];
+        }
+
     }
 }

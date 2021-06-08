@@ -6,51 +6,132 @@ using System.Threading.Tasks;
 
 namespace kolko_i_krzyzyk_ob
 {
-    public class Gra
+    public class Game
     {
-        int runda;
-        
-        Gracz gracz;
-        Plansza plansza;
+        Player player1;
+        Player player2;
+        Player draw;
         Ui ui;
 
-       
-        public Gra()
+        Player winner;
+        int roundNumber = 0;
+
+        Player activePlayer;
+        Board board = new Board();
+        int move;
+
+        public Game(Player player1, Player player2, Player draw, Ui ui)
         {
-            runda = 0;
-            plansza = new Plansza();
-            gracz = new Gracz("X");
-            ui = new Ui();
-            
+            this.player1 = player1;
+            this.player2 = player2;
+            this.draw = draw;
+            this.ui = ui;
         }
 
-        public int GetRunda()
+        public Player start(Player player1, Player player2, Ui ui)
         {
-            return runda;
-        }
-        
-        public void Reset()
-        {
-            plansza.resetPlansza();
-            runda = 0;
-        }
 
-        
-
-        public void Graj()
-        {
             do
             {
+                roundNumber++;
+
+                ui.displayBoard(board.buildBoardToPrint());
+                activePlayer = changeActivePlayer();
+                ui.displayMessage("ruch wykonuje gracz " + activePlayer.GetName());
+                do
+                {
+                    move = ui.makeMove();
+                } while (!board.isAllowed(move));
+                board.updateBoard(move, activePlayer);
 
 
+                if (isWinningState())
+                {
+                    winner = activePlayer;
+                }
+                else if (roundNumber == 9 || winner == null)
+                {
+                    winner = draw;//remis
+                }
 
-                Console.WriteLine("a");
-                
+            } while (winner != null);
 
 
-            } while ( true);
+            return winner;
         }
 
-        
-    }
-}
+        private  Player changeActivePlayer()
+        {
+            if (activePlayer == player2 || activePlayer == null) 
+            {
+                activePlayer = player1;
+            }
+            else
+            {
+                activePlayer = player2;
+            }
+            return activePlayer;
+        }
+
+        private bool isWinningState()
+        {
+            {
+                for (int set = 0; set <= 21; set += 3)
+                {
+                    if (isWinner(player1, set))
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+
+
+        private bool isWinner(Player player, int setIndex)
+        {
+            int[,] zestawWygrywajacy = new int[24, 2]
+            {
+                {0,0},
+                {0,1},
+                {0,2},
+
+                {1,0},
+                {1,1},
+                {1,2},
+
+                {2,0},
+                {2,1},
+                {2,2},
+
+                {0,0},
+                {1,0},
+                {2,0},
+
+                {0,0},
+                {1,1},
+                {2,2},
+
+                {0,1},
+                {1,1},
+                {2,1},
+
+                {0,2},
+                {1,2},
+                {2,2},
+
+                {0,2},
+                {1,1},
+                {2,0}
+            };
+            for (int row = setIndex; row < 3; row++)
+            {
+                if (!(board.GetIndexValue(zestawWygrywajacy[row, 0], zestawWygrywajacy[row, 1]) ==player.GetFigure()))
+                {
+                    return false;
+                    }
+            }
+            return true;
+            }
+
+    } }

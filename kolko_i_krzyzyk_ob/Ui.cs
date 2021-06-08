@@ -6,57 +6,42 @@ using System.Threading.Tasks;
 
 namespace kolko_i_krzyzyk_ob
 {
-    public class Ui : Plansza
-    {
-        string input;
-        int ruch;
-        int x;
-        int y;
-        
-        
-        public void setRuch()
-        {
-            input = Console.ReadLine();
-            try
-            {
-                ruch = int.Parse(input);
-            }
-            catch (Exception)
-            {
+    public class Ui{
 
-                Console.WriteLine("Podaj liczbe od 1-9");
-            }
-        }
-
-        public void wykonajRuch(Gracz gracz)
-        {
-            string figura = gracz.GetFigura();
-            if (ruch % 2 == 0)
+           public void displayMessage(String message)
             {
-                x = (14 % ruch)/2;
-                if (x > 2) x = 2;
-
-                y = (101 % (ruch + 1) - 1);
+                Console.WriteLine(message);
             }
+
+
+            public void displayWinner(Player winner)
+            {
+                if (winner.GetName == "Remis")
+            {
+                Console.WriteLine("Remis");
+            } 
             else
             {
-                x = 321 % ruch;
-                if (x > 2) x = 2;
-
-                y = 56 % ruch;
-                
+                Console.WriteLine("wygrał " + winner.getName);
             }
-            setPlansza(x, y, figura);
-        }
-        public void WyczyscKonsole()
-        {
-            Console.Clear();
-        }
-        public int GetRuch()
-        {
-            
-            return ruch;
-        }
+    }
+
+    public void displayBoard(String board)
+            {
+                Console.WriteLine(board);
+            }
+
+            public String inputyourName()
+            {
+                return Console.ReadLine();
+            }
+
+            public int makeMove()
+            {
+                return int.Parse(Console.ReadLine());
+            }
+
     }
 }
+
 
